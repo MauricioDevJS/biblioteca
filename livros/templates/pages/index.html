@@ -1,0 +1,58 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href={% static 'style.css' %}>
+    <title>Livros</title>
+</head>
+
+<body>
+    <h1>Biblioteca</h1>
+
+    <form action="{% url 'busca' %}">
+        <input type="text" name="search" placeholder="Bucar livro...">
+        <button type="submit">Buscar</button>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Título</th>
+                <th>Autor</th>
+                <th>Lançamento</th>
+                <th>Ativo</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for livro in livros %}
+            <tr>
+                <td>{{livro.id}}</td>
+                <td>{{livro.title}}</td>
+                <td>{{livro.author}}</td>
+                <td>{{livro.release_year}}</td>
+                {% if livro.active == True %}
+                <td><i class="fa fa-check"></i></td>
+                {% else %}
+                <td><i class="fa fa-x"></i></td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="pagination">
+        <a href="#">1</a>
+        <a href="#">2</a>
+        <a href="#">3</a>
+        <a href="#">4</a>
+        <a href="#">5</a>
+    </div>
+</body>
+
+</html>
